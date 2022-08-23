@@ -16,7 +16,6 @@ trait PasswordTrait {
             "symbols" => $symbols
         ];
 
-        $passwordmanager = new PasswordManager($params);
         return (new PasswordManager($params))->generatepassword();
     }
 }

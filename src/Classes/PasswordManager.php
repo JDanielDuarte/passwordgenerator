@@ -4,14 +4,14 @@ namespace Jdanielduarte\Passwordgenerator\Classes;
 
 class PasswordManager {
 
-    private $size;                     // tamanho da password
-    private $lower;
-    private $upper;
-    private $numbers;
-    private $symbols;
-    private $alphabet = "";                 // lista de caracteres a ser utilizados na geracao da password
+    private mixed $size;                     // tamanho da password
+    private mixed $lower;
+    private mixed $upper;
+    private mixed $numbers;
+    private mixed $symbols;
+    private string $alphabet = "";                 // lista de caracteres a ser utilizados na geracao da password
 
-    private $finalpass = "";                // password final gerada
+    private string $finalpass = "";                // password final gerada
 
     public function __construct($params) {
 
@@ -26,35 +26,39 @@ class PasswordManager {
         if ($this->symbols) $this->alphabet .= "!?=-_#;.";
     }
 
-    public function generatePassword() {                // Funcao de geracao da password
+    /**
+     * @return string
+     */
+    public function generatePassword(): string
+    {                // Funcao de geracao da password
 
         $pass = array();
         $alphaLength = strlen($this->alphabet) - 1;
 
-        while (!$pass) {                              // Ciclo onde e' gerada a password 
+        while (!$pass) {                              // Ciclo onde e' gerada a password
             for ($i = 0; $i < $this->size; $i++) {
                 $n = rand(0, $alphaLength);
                 $pass[] = $this->alphabet[$n];
             }
             $this->finalpass = implode($pass);
-            
+
             if (strpbrk($this->alphabet, "abcdefghijklmnopqrstuvwxyz")) {                   // E' feita a verificacao se sao cumpridos os requisitos corretos
-              if (strpbrk($this->finalpass, "abcdefghijklmnopqrstuvwxyz") == False)         // Se nao for o caso, o array e colocado como vazio e e' criada uma nova
+              if (!strpbrk($this->finalpass, "abcdefghijklmnopqrstuvwxyz"))         // Se nao for o caso, o array e colocado como vazio e e' criada uma nova
                 $pass = array();
             }
-        
+
             if (strpbrk($this->alphabet, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")) {
-              if (strpbrk($this->finalpass, "ABCDEFGHIJKLMNOPQRSTUVWXYZ") == False)
+              if (!strpbrk($this->finalpass, "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
                 $pass = array();
             }
-        
+
             if (strpbrk($this->alphabet, "1234567890")) {
-              if (strpbrk($this->finalpass, "1234567890") == False)
+              if (!strpbrk($this->finalpass, "1234567890"))
                 $pass = array();
             }
-        
+
             if (strpbrk($this->alphabet, "!?=-_#;.")) {
-              if (strpbrk($this->finalpass, "!?=-_#;.") == False)
+              if (!strpbrk($this->finalpass, "!?=-_#;."))
                 $pass = array();
             }
         }
@@ -62,17 +66,23 @@ class PasswordManager {
         return $this->finalpass;
     }
 
-    public function encrypt() {                                         // Funcao de encriptacao da passe
-        $hash = password_hash($this->finalpass, PASSWORD_DEFAULT);
-
-        return $hash;
+    /**
+     * @return string
+     */
+    public function encrypt(): string
+    {                                         // Funcao de encriptacao da passe
+        return password_hash($this->finalpass, PASSWORD_DEFAULT);
     }
 
-    public function check() {
+    /**
+     * @return bool
+     */
+    public function check(): bool
+    {
       if ($this->lower == 1 || $this->upper == 1)
-        return "ok";
+        return true;
       else
-        return -1;
+        return false;
     }
 
 }

@@ -10,8 +10,7 @@ use Illuminate\Http\Request;
 class PasswordsRegistadasController extends Controller
 {
 
-
-    public function generate(Request $request)
+    public function generate(Request $request): float|int|string
     {
 
         $params = [
@@ -21,20 +20,22 @@ class PasswordsRegistadasController extends Controller
             "numbers" => $request->num,
             "symbols" => $request->symb
         ];
-        
+
         $passwordmanager = new PasswordManager($params);
 
-        if ($passwordmanager->check() == "ok") 
-        {
-            if ($this->lastTime() != null) {
-
-                $lastTime = $this->lastTime()->created_at;
-                if (now()->diffInSeconds($lastTime) <= 10) {
-                    return (10 - now()->diffInSeconds($lastTime));
-                };
-            }
+        if (!$passwordmanager->check()) {
+            return "letterError";
         }
-        else return "letterError";
+
+
+        $lastTime = $this->lastTime()->created_at ?? NULL;
+
+        if ($lastTime && now()->diffInSeconds($lastTime) <= 10)
+        {
+            return (10 - now()->diffInSeconds($lastTime));
+
+        }
+
 
         $pass = "";
         while (!$pass) {
@@ -45,7 +46,7 @@ class PasswordsRegistadasController extends Controller
             }
         }
 
-       
+
         $this->store($hash);         // Password encriptada guardada na base de dados  // try catch?
 
         return $pass;
@@ -56,22 +57,21 @@ class PasswordsRegistadasController extends Controller
     {
         $password = new PasswordsRegistadas;
         $password->password = $hash;
-        if ($password->save())
-        {
+        if ($password->save()) {
             return true;
         }
-       
+
         return false;
     }
 
 
     public function checkDuplicate($hash)
     {
-        return PasswordsRegistadas::where('password',$hash)->first();
- 
+        return PasswordsRegistadas::where('password', $hash)->first();
+
     }
 
-    public function lastTime() 
+    public function lastTime()
     {
         return PasswordsRegistadas::latest()->first();
     }

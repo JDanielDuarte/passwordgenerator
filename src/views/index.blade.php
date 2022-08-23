@@ -131,33 +131,13 @@
                   vm.password = response.data;
                 }
               })
-              .catch(function (error) {
-                if (error.response) {
-                  console.log(error.response.data);
-                  console.log(error.response.status);
-                  console.log(error.response.headers);
-                }
-                else if (error.request) {
-                  console.log(error.request);
-                }
-                else {
-                  console.log('Error', error.message);
-                }
-                console.log(error.config);
-              })
+            
             },
 
             checkboxValue : function(checkbox) {
               checkbox.value = checkbox.checked ? 1 : 0;
             },
 
-            copy: function() {
-              var e = document.getElementById("psword");    // Funcao para copiar a password gerada
-              var copyText = e.innerText;
-
-              navigator.clipboard.writeText(copyText);
-              alert("Texto copiado.");
-            }
           }
       });
 

@@ -2,7 +2,7 @@
 
 namespace Jdanielduarte\Passwordgenerator\Traits;
 
-use Jdanielduarte\Passwordgenerator\Classes\PasswordManager;
+use Jdanielduarte\Passwordgenerator\Classes\PasswordManager;            // Generates a random password
 
 trait PasswordTrait {
 

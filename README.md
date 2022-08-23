@@ -1,10 +1,10 @@
 # Password Generator
 
 ## Instalação Manual
-* Download do software para a pasta vendor\\jdanidelduarte\\passwordgenerator
+* Download do software para a pasta vendor\\jdanielduarte\\passwordgenerator
 * Adicionar a seguinte linha ao ficheiro config\\app.php na secção providers
   * `Jdanielduarte\Passwordgenerator\PasswordgeneratorServiceProvider::class,`
-* Acrescentar ficheiro composer.json
+* Acrescentar no ficheiro composer.json:
 ```
 "autoload-dev": {
     "psr-4": {
@@ -14,4 +14,4 @@
 },
 ```
 * Executar `composer dump-autoload`
-* Executr `php artisan migrate`
+* Executar `php artisan migrate`

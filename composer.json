@@ -1,0 +1,16 @@
+{
+    "name": "jdanielduarte/passwordgenerator",
+    "description": "Password generator",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "João Daniel Duarte",
+            "email": "99670113+JDanielDuarte@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
+
+

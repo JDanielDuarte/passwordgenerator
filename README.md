@@ -1,7 +1,5 @@
 # Password Generator
 
-## Um gerador de passwords aleatórias
-
 # Instalação Manual
 * Download do software para a pasta package\\passwordgenerator
 * Adicionar a seguinte linha ao ficheiro config\\app.php na secção providers
@@ -16,5 +14,3 @@
 },
 ```
 * Executar `composer dump-autoload`
-* Acrescentar a permissão para ver o menu com a slug `allbs-catalogo`
-* Atribuir a permissão as funções

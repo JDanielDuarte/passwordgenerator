@@ -4,6 +4,7 @@ namespace Jdanielduarte\Passwordgenerator\Controllers;
 
 use Jdanielduarte\Passwordgenerator\Classes\PasswordManager;
 use Jdanielduarte\Passwordgenerator\Models\PasswordsRegistadas;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class PasswordsRegistadasController extends Controller
@@ -25,11 +26,13 @@ class PasswordsRegistadasController extends Controller
 
         if ($passwordmanager->check() == "ok") 
         {
+            if ($this->lastTime() != null) {
 
-            $lastTime = $this->lastTime()->created_at;
-            if (now()->diffInSeconds($lastTime) <= 10) {
-                return (10 - now()->diffInSeconds($lastTime));
-            };
+                $lastTime = $this->lastTime()->created_at;
+                if (now()->diffInSeconds($lastTime) <= 10) {
+                    return (10 - now()->diffInSeconds($lastTime));
+                };
+            }
         }
         else return "letterError";
 
@@ -72,4 +75,5 @@ class PasswordsRegistadasController extends Controller
     {
         return PasswordsRegistadas::latest()->first();
     }
+
 }

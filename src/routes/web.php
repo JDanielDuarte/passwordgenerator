@@ -1,6 +1,8 @@
 <?php
 
 namespace Jdanielduarte\Passwordgenerator\Routes;
+
+use Jdanielduarte\Passwordgenerator\Controllers\PasswordsRegistadasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('/passwordgenerator')->group(function () {
-    Route::get('/', fn()=>view('index'));
-    Route::get('/generate',[App\Http\Controllers\PasswordsRegistadasController::class,'generate'])->name('password.generate');
+    Route::get('/', fn()=>view('passwordgenerator::index'));
+    Route::get('/generate',[PasswordsRegistadasController::class,'generate'])->name('password.generate');
 });

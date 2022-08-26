@@ -7,7 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class PasswordsRegistadas extends Model
 {
-    use HasFactory;
-
-    #protected $table = 'jd_passwords';    
+    use HasFactory;    
 }
